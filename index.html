@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atotoarere Transport Fare Calculation System</title>
+    <link rel="stylesheet" href="trans.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>=== ATOTOARERE TRANSPORT FARE CALCULATION SYSTEM ===</h1>
+      </div>
+
+      <div class="content">
+        <form id="fareForm" action="#" method="post">
+          <h2>Trip Details</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="distance">Enter distance (in km):</label>
+              <input
+                type="number"
+                id="distance"
+                name="distance"
+                step="0.1"
+                min="0.1"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="fuelPrice"
+                >Enter current fuel price (₦ per liter):</label
+              >
+              <input
+                type="number"
+                id="fuelPrice"
+                name="fuelPrice"
+                step="0.01"
+                min="0.01"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="vehicleType">Select vehicle type:</label>
+            <select id="vehicleType" name="vehicleType" required>
+              <option value="">-- Choose a vehicle --</option>
+              <option value="Bus">1. Bus</option>
+              <option value="Taxi">2. Taxi</option>
+              <option value="Truck">3. Truck</option>
+              <option value="Motorcycle">4. Motorcycle</option>
+              <option value="Tricycle">5. Tricycle</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Road Condition Factor:</label>
+            <select id="roadCondition">
+              <option value="">-- Choose road condition --</option>
+              <option value="1.0">Good (1.0)</option>
+              <option value="1.2">Average (1.2)</option>
+              <option value="1.5">Bad (1.5)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="timeOfDay">Select time of day:</label>
+            <select id="timeOfDay" name="timeOfDay" required>
+              <option value="">-- Choose time period --</option>
+              <option value="Morning_Peak">1. Morning Peak (7-10 AM)</option>
+              <option value="Afternoon">2. Afternoon (10 AM - 4 PM)</option>
+              <option value="Evening_Peak">3. Evening Peak (4-8 PM)</option>
+              <option value="Night">4. Night (8 PM - 7 AM)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Traffic Factor:</label>
+              <select id="trafficFactor">
+                <option value="">-- Choose traffic factor --</option>
+                <option value="1.0">No Traffic (1.0)</option>
+                <option value="1.3">Moderate (1.3)</option>
+                <option value="1.6">Heavy (1.6)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="passengerCount">Enter number of passengers:</label>
+              <input
+                type="number"
+                id="passengerCount"
+                name="passengerCount"
+                min="1"
+                value="1"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button type="submit">Calculate Fare</button>
+            <button type="reset">Reset Form</button>
+          </div>
+        </form>
+
+        <div class="divider"></div>
+
+        <div id="fareBreakdown">
+          <h2>=== FARE BREAKDOWN ===</h2>
+
+          <div class="breakdown-section">
+            <p>
+              <strong>Vehicle Type:</strong>
+              <span id="displayVehicleType">-</span>
+            </p>
+            <p>
+              <strong>Distance:</strong> <span id="displayDistance">-</span> km
+            </p>
+            <p>
+              <strong>Time of Day:</strong> <span id="displayTimeOfDay">-</span>
+            </p>
+            <p>
+              <strong>Passengers:</strong> <span id="displayPassengers">-</span>
+            </p>
+          </div>
+
+          <div class="breakdown-section">
+            <p>
+              <strong>Base Fare:</strong> <span id="displayBaseFare">-</span>
+            </p>
+            <p>
+              <strong>Fuel Price Adjustment:</strong> +<span
+                id="displayFuelAdjustment"
+                >-</span
+              >
+            </p>
+            <p>
+              <strong>Road Condition Adjustment:</strong> +<span
+                id="displayRoadAdjustment"
+                >-</span
+              >
+            </p>
+            <p>
+              <strong>Time of Day Surcharge:</strong> +<span
+                id="displayTimeAdjustment"
+                >-</span
+              >
+            </p>
+            <p>
+              <strong>Traffic Surcharge:</strong> +<span
+                id="displayTrafficAdjustment"
+                >-</span
+              >
+            </p>
+            <p>
+              <strong>Union Levy:</strong> +<span id="displayUnionLevy">-</span>
+            </p>
+          </div>
+
+          <div class="breakdown-section" id="passengerCalculation">
+            <p>
+              <strong>Subtotal per passenger:</strong>
+              <span id="displaySubtotal">-</span>
+            </p>
+            <p>
+              <strong>Number of passengers:</strong>
+              <span id="displayPassengerCount">-</span>
+            </p>
+          </div>
+
+          <div class="total-section">
+            <h3>TOTAL FARE: <span id="displayTotalFare">-</span></h3>
+          </div>
+          <div class="print_button">
+            <button id="printBtn" type="print">Print</button>
+            <button id="pdfBtn" type="export">Export to PDF</button>
+          </div>
+        </div>
+
+        <footer>
+          <p>=== Thank you for using Atotoarere Transport Fare System ===</p>
+        </footer>
+      </div>
+    </div>
+    <script src="trans.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </body>
+</html>
